@@ -15,7 +15,8 @@ public class Tarea_1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Probando Git...");
+        JFVentanaPrincipal ventana=new JFVentanaPrincipal();
+        ventana.setVisible(true);
     }
     
 }
