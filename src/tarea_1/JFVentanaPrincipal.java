@@ -27,22 +27,62 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbCargarArchivo = new javax.swing.JLabel();
+        tfCargarArchivo = new javax.swing.JTextField();
+        btCargarArchivo = new javax.swing.JButton();
+        btAnalizarArchivo = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tarea_1");
+
+        lbCargarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbCargarArchivo.setText("Cargar archivo:");
+
+        tfCargarArchivo.setEditable(false);
+        tfCargarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        btCargarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btCargarArchivo.setText("Cargar");
+
+        btAnalizarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btAnalizarArchivo.setText("Analizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCargarArchivo)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfCargarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btCargarArchivo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btAnalizarArchivo)))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbCargarArchivo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCargarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCargarArchivo)
+                    .addComponent(btAnalizarArchivo))
+                .addContainerGap(638, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAnalizarArchivo;
+    private javax.swing.JButton btCargarArchivo;
+    private javax.swing.JLabel lbCargarArchivo;
+    private javax.swing.JTextField tfCargarArchivo;
     // End of variables declaration//GEN-END:variables
 }
