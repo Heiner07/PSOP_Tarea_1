@@ -17,6 +17,7 @@ public class Tarea_1 {
     public static void main(String[] args) {
         JFVentanaPrincipal ventana=new JFVentanaPrincipal();
         ventana.setVisible(true);
+        //comentario prueba
     }
     
 }
