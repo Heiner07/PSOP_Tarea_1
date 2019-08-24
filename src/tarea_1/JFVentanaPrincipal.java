@@ -5,8 +5,10 @@
  */
 package tarea_1;
 
-import java.awt.Dimension;
-import javax.swing.JButton;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -15,12 +17,16 @@ import javax.swing.JButton;
 public class JFVentanaPrincipal extends javax.swing.JFrame {
     
     int paso=1;
+    String rutaArchivo;
+    Boolean archivoCargado;
 
     /**
      * Creates new form JFVentanaPrincipal
      */
     public JFVentanaPrincipal() {
         initComponents();
+        this.archivoCargado=false;
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -52,6 +58,11 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
 
         btCargarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btCargarArchivo.setText("Cargar");
+        btCargarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCargarArchivoActionPerformed(evt);
+            }
+        });
 
         btAnalizarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btAnalizarArchivo.setText("Analizar");
@@ -116,7 +127,11 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAnalizarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnalizarArchivoActionPerformed
-        
+        if(archivoCargado){
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Cargue un archivo para analizar", "Carga de archivo",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btAnalizarArchivoActionPerformed
 
     private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
@@ -125,6 +140,18 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
         panelInstrucciones.updateUI();
         paso++;
     }//GEN-LAST:event_btSiguienteActionPerformed
+
+    private void btCargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCargarArchivoActionPerformed
+        JFileChooser cargador=new JFileChooser();
+        cargador.setFileFilter(new FileNameExtensionFilter("ASM", "asm"));
+        cargador.showOpenDialog(this);
+        File archivo=cargador.getSelectedFile();
+        if(archivo!=null){
+            tfCargarArchivo.setText(archivo.getName());
+            rutaArchivo=archivo.getPath();
+            archivoCargado=true;
+        }
+    }//GEN-LAST:event_btCargarArchivoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAnalizarArchivo;
