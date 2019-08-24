@@ -5,6 +5,8 @@
  */
 package tarea_1;
 
+import java.io.IOException;
+
 /**
  *
  * @author Heiner
@@ -13,9 +15,11 @@ public class Tarea_1 {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
-        JFVentanaPrincipal ventana=new JFVentanaPrincipal();
+    public static void main(String[] args) throws IOException {
+        Operaciones op = new Operaciones();
+        /*JFVentanaPrincipal ventana=new JFVentanaPrincipal();
         ventana.setVisible(true);
         String prueba1 = "0011 0001 00000101";
         String prueba2 = "0011 0010 00000011";
@@ -23,13 +27,16 @@ public class Tarea_1 {
         String prueba4 = "0101 0010 00000000";
         String prueba5 = "0100 0001 00000000";
         String prueba6 = "0010 0001 00000000";   
-        Operaciones op = new Operaciones();
+        
         op.Operaciones(prueba1);
         op.Operaciones(prueba2);
         op.Operaciones(prueba3);
         op.Operaciones(prueba4);
         op.Operaciones(prueba5);
         op.Operaciones(prueba6);
+        */
+        Operaciones.muestraContenido("C:/Users/home/Desktop/Principios de Software/pruebaEjemplo.asm");
+        Operaciones.decimalABinaro(-12);
     }
     
 }

@@ -5,6 +5,12 @@
  */
 package tarea_1;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
 /**
  *
  * @author home
@@ -18,6 +24,7 @@ public class Operaciones {
     //[3] = CX
     //[4] = DX
     int[] arregloRegistros = {0,0,0,0,0};
+    static String[] memoria = new String[99];
     
     
     public void Operaciones(String instrucciones){
@@ -60,9 +67,39 @@ public class Operaciones {
         System.out.println("DX: "+arregloRegistros[4]);
         System.out.println("AC: "+arregloRegistros[0]);
     }
+     
+    public static void muestraContenido(String archivo) throws FileNotFoundException, IOException {
+        String cadena;
+        String cadena2 ="";
+        
+        FileReader f = new FileReader(archivo);
+        try (BufferedReader b = new BufferedReader(f)) {
+            while((cadena = b.readLine())!=null) {
+                cadena2 += cadena +"\n";               
+              //  System.out.println(i+" -> "+cadena);
+            }
+        }
+        memoria = cadena2.split("\n");
+        memoriaToBits();
+    }
     
+    public static void memoriaToBits(){
+        String[] parteOperacion,parteResto; 
+        String instruccionEnbits;       
+        for(int i=0;i<memoria.length;i++){
+            parteOperacion = memoria[i].split(" ");
+            instruccionEnbits = parteOperacion[0];
+            parteResto = parteOperacion[1].split(",");
+            if(parteResto.length >=2){
+                memoria[i] = toBinario(instruccionEnbits)+" "+toBinario(parteResto[0])+" "+decimalABinaro(Integer.parseInt(parteResto[1]));              
+            }else{
+               memoria[i] = toBinario(instruccionEnbits)+" "+toBinario(parteResto[0])+" 00000000";
+            }
+            System.out.println(memoria[i]);
+        }
+    }
     
-    public int registroPosicion(String registro){       
+    public static int registroPosicion(String registro){       
             switch(registro) {
                 case "0001"://AX                    
                      return 1;   
@@ -78,6 +115,35 @@ public class Operaciones {
             }    
 
     }
+    
+    public static String toBinario(String registro){      
+            switch(registro) {
+                case "AX"://AX                    
+                     return "0001";   
+                case "BX"://BX
+                    return "0010";                                  
+                case "CX"://CX
+                    return "0011";
+                case "DX"://DX
+                   return "0100";
+                case "LOAD"://LOAD
+                   return "0001";
+                case "STORE"://STORE
+                   return "0010";
+                case "MOV"://MOV
+                   return "0011";
+                case "SUB"://SUB
+                   return "0100";                
+                case "ADD"://ADD
+                   return "0101";
+                default:
+                    return "0000";
+                   
+            }    
+
+    }
+    
+    
    
         
             
@@ -115,11 +181,18 @@ public class Operaciones {
         }     
            
     }
-    void decimalABinaro(int a) {
+    public static String decimalABinaro(int a) {
+        boolean negativo = false;
+        if(a<0){
+            a *=-1;
+            negativo = true;
+        }       
         String temp = Integer.toBinaryString(a);
-        while(temp.length() !=8){
+        
+        while(temp.length() !=7){
             temp = "0"+temp;
         }
-        System.out.println(temp);
+        if(negativo){temp="1"+temp;}else{temp="0"+temp;}
+        return temp;
     }
 }
