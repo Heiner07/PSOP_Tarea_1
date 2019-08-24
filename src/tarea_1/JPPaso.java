@@ -14,9 +14,28 @@ public class JPPaso extends javax.swing.JPanel {
     /**
      * Creates new form JPPaso
      * @param paso
+     * @param posicionMemoria
      */
-    public JPPaso(int paso) {
+    public JPPaso(int paso,int posicionMemoria) {
+        
+        
         initComponents();
+        Operaciones op = new Operaciones();
+        op.Operaciones(Operaciones.memoria[posicionMemoria]);
+        
+        String[] parts;
+        parts = Operaciones.memoria[posicionMemoria].split(" ");
+        tfOperacion1.setText(parts[0]);
+        tfRegistro1.setText(parts[1]);
+        tfValor1.setText(parts[2]);
+        tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
+        tfRegistroAX.setText(Integer.toString(Operaciones.arregloRegistros[1]));
+        tfRegistroBX.setText(Integer.toString(Operaciones.arregloRegistros[2]));
+        tfRegistroCX.setText(Integer.toString(Operaciones.arregloRegistros[3]));
+        tfRegistroDX.setText(Integer.toString(Operaciones.arregloRegistros[4]));
+        tfRegistroIR.setText(Operaciones.memoria[posicionMemoria]);
+        tfRegistroPC.setText(Integer.toString(posicionMemoria));
+        //tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
         lbPaso.setText("Paso: "+paso);
     }
 
@@ -254,7 +273,7 @@ public class JPPaso extends javax.swing.JPanel {
                                 .addComponent(tfRegistroPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 15, Short.MAX_VALUE)))
+                        .addGap(0, 124, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

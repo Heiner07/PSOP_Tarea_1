@@ -19,9 +19,9 @@ public class Tarea_1 {
      */
     public static void main(String[] args) throws IOException {
         Operaciones op = new Operaciones();
-        /*JFVentanaPrincipal ventana=new JFVentanaPrincipal();
+        JFVentanaPrincipal ventana=new JFVentanaPrincipal();
         ventana.setVisible(true);
-        String prueba1 = "0011 0001 00000101";
+       /* String prueba1 = "0011 0001 00000101";
         String prueba2 = "0011 0010 00000011";
         String prueba3 = "0001 0001 00000000";
         String prueba4 = "0101 0010 00000000";
@@ -36,7 +36,7 @@ public class Tarea_1 {
         op.Operaciones(prueba6);
         */
         Operaciones.muestraContenido("C:/Users/home/Desktop/Principios de Software/pruebaEjemplo.asm");
-        Operaciones.decimalABinaro(-12);
+        
     }
     
 }

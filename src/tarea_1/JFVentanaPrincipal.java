@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class JFVentanaPrincipal extends javax.swing.JFrame {
     
     int paso=1;
+    int posicionMemoria = 2;
     String rutaArchivo;
     Boolean archivoCargado;
 
@@ -135,10 +136,11 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btAnalizarArchivoActionPerformed
 
     private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
-        JPPaso ejecucion=new JPPaso(paso);
+        JPPaso ejecucion=new JPPaso(paso,posicionMemoria);
         panelInstrucciones.add(ejecucion);
         panelInstrucciones.updateUI();
         paso++;
+        posicionMemoria++;
     }//GEN-LAST:event_btSiguienteActionPerformed
 
     private void btCargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCargarArchivoActionPerformed

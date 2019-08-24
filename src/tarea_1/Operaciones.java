@@ -23,7 +23,7 @@ public class Operaciones {
     //[2] = BX
     //[3] = CX
     //[4] = DX
-    int[] arregloRegistros = {0,0,0,0,0};
+    static int[] arregloRegistros = {0,0,0,0,0};
     static String[] memoria = new String[99];
     
     
@@ -32,11 +32,7 @@ public class Operaciones {
         parts = instrucciones.split(" ");
         String operacion = parts[0];
         String registro = parts[1];
-        String numero = parts[2];
-        System.out.println("operador: "+operacion);
-        System.out.println("Registro: "+registro);
-        System.out.println("Numero: "+numero);
-        
+        String numero = parts[2];        
         switch(operacion) {
             case "0001"://LOAD
                 arregloRegistros[0] = arregloRegistros[registroPosicion(registro)];              
@@ -61,11 +57,6 @@ public class Operaciones {
             default:             
                 break;
         }
-        System.out.println("AX: "+arregloRegistros[1]);
-        System.out.println("BX: "+arregloRegistros[2]);
-        System.out.println("CX: "+arregloRegistros[3]);
-        System.out.println("DX: "+arregloRegistros[4]);
-        System.out.println("AC: "+arregloRegistros[0]);
     }
      
     public static void muestraContenido(String archivo) throws FileNotFoundException, IOException {
@@ -76,7 +67,6 @@ public class Operaciones {
         try (BufferedReader b = new BufferedReader(f)) {
             while((cadena = b.readLine())!=null) {
                 cadena2 += cadena +"\n";               
-              //  System.out.println(i+" -> "+cadena);
             }
         }
         memoria = cadena2.split("\n");
