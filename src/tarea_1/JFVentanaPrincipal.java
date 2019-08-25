@@ -17,8 +17,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class JFVentanaPrincipal extends javax.swing.JFrame {
     
-    int paso=1;
-    int posicionMemoria = 0;
+    int paso;
+    int posicionMemoria;
+    int instruccion;
     String rutaArchivo;
     Boolean archivoCargado;
     
@@ -27,8 +28,21 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
      */
     public JFVentanaPrincipal() {
         initComponents();
+        establecerValores();
         this.archivoCargado=false;
         this.setLocationRelativeTo(null);
+    }
+    
+    private void establecerValores(){
+        this.paso=1;
+        this.posicionMemoria=0;
+        this.instruccion=1;
+    }
+    
+    private void reiniciarValores(){
+        panelInstrucciones.removeAll();
+        establecerValores();
+        Operaciones.limpiarClase();
     }
 
     /**
@@ -50,7 +64,6 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tarea_1");
-        setPreferredSize(new java.awt.Dimension(820, 730));
 
         lbCargarArchivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbCargarArchivo.setText("Cargar archivo:");
@@ -132,6 +145,7 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
     private void btAnalizarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnalizarArchivoActionPerformed
         if(archivoCargado){
             try {
+                reiniciarValores();
                 Operaciones.muestraContenido(rutaArchivo);
                 posicionMemoria=Operaciones.posicionMemoria;
                 btSiguienteActionPerformed(evt); // Funcion del boton Siguiente.
@@ -147,20 +161,19 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
     private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
         if(paso<= (Operaciones.numeroInstrucciones *2) && posicionMemoria<99){
             if(Operaciones.ejecutar){
-                JPPaso ejecutarInstruccion=new JPPaso(paso,posicionMemoria-1,1);   
+                JPPaso ejecutarInstruccion=new JPPaso(paso,posicionMemoria-1,instruccion,true);   
                 panelInstrucciones.add(ejecutarInstruccion);
-                panelInstrucciones.updateUI();
                 Operaciones.ejecutar = false;
-            
+                instruccion++;
             }else{
-                JPPaso ejecucion=new JPPaso(paso,posicionMemoria);            
+                JPPaso ejecucion=new JPPaso(paso,posicionMemoria,instruccion,false);
                 panelInstrucciones.add(ejecucion);
-                panelInstrucciones.updateUI();
                 Operaciones.ejecutar = true;
                 posicionMemoria++;
-            }           
+            }
             paso++;
-           
+            jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMaximum());
+            panelInstrucciones.updateUI();
         }else{
             JOptionPane.showMessageDialog(this, "No hay más instrucciones o se llegó al final de la memoria.", "No hay más instrucciones",JOptionPane.WARNING_MESSAGE);
         }

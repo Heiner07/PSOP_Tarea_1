@@ -20,68 +20,26 @@ public class JPPaso extends javax.swing.JPanel {
      * Creates new form JPPaso
      * @param paso
      * @param posicionMemoria
+     * @param numeroInstruccion
+     * @param ejecucion
      */
     
-    public JPPaso(int paso,int posicionMemoria) {
-        initComponents();        
-        int instrucciones=Operaciones.numeroInstrucciones-paso;
-        String[] parts;
-        parts = Operaciones.memoria[posicionMemoria].split(" ");
-        tfOperacion1.setText(parts[0]);
-        tfRegistro1.setText(parts[1]);
-        tfValor1.setText(parts[2]);
-        lbMemoria1.setText(String.valueOf(posicionMemoria));
-        if(instrucciones>=2){
-            parts = Operaciones.memoria[posicionMemoria+1].split(" ");
-            tfOperacion2.setText(parts[0]);
-            tfRegistro2.setText(parts[1]);
-            tfValor2.setText(parts[2]);
-            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
-            parts = Operaciones.memoria[posicionMemoria+2].split(" ");
-            tfOperacion3.setText(parts[0]);
-            tfRegistro3.setText(parts[1]);
-            tfValor3.setText(parts[2]);
-            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
-        }else if(instrucciones==1){
-            parts = Operaciones.memoria[posicionMemoria+1].split(" ");
-            tfOperacion2.setText(parts[0]);
-            tfRegistro2.setText(parts[1]);
-            tfValor2.setText(parts[2]);
-            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
-            tfOperacion3.setText("0000");
-            tfRegistro3.setText("0000");
-            tfValor3.setText("000000000");
-            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
-        }else{
-            tfOperacion2.setText("0000");
-            tfRegistro2.setText("0000");
-            tfValor2.setText("00000000");
-            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
-            tfOperacion3.setText("0000");
-            tfRegistro3.setText("0000");
-            tfValor3.setText("000000000");
-            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
-        }
-        tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
-        tfRegistroAX.setText(Integer.toString(Operaciones.arregloRegistros[1]));
-        tfRegistroBX.setText(Integer.toString(Operaciones.arregloRegistros[2]));
-        tfRegistroCX.setText(Integer.toString(Operaciones.arregloRegistros[3]));
-        tfRegistroDX.setText(Integer.toString(Operaciones.arregloRegistros[4]));
-        tfRegistroIR.setText(Operaciones.memoria[posicionMemoria]);
-        tfRegistroPC.setText(Integer.toString(posicionMemoria));
-        //tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
-        lbPaso.setText("Paso: "+paso);
+    public JPPaso(int paso,int posicionMemoria, int numeroInstruccion, Boolean ejecucion) {
+        initComponents();
+        realizarEjecucion(posicionMemoria, ejecucion);
+        establecerValoresMemoriaRegistros(paso, posicionMemoria, numeroInstruccion);
     }
-
     
+    private void realizarEjecucion(int posicionMemoria, Boolean ejecucion){
+        if(ejecucion){
+            Operaciones op = new Operaciones();     
+            op.Operaciones(Operaciones.memoria[posicionMemoria]);//execute stage
+            posicionMemoria++;
+        }tfRegistroPC.setText(Integer.toString(posicionMemoria));
+    }
     
-    public JPPaso(int paso,int posicionMemoria,int k) {
-        initComponents();     
-        Operaciones op = new Operaciones();        
-        op.Operaciones(Operaciones.memoria[posicionMemoria]);//execute stage
-        
-        
-        int instrucciones=Operaciones.numeroInstrucciones-paso;
+    private void establecerValoresMemoriaRegistros(int paso,int posicionMemoria, int numeroInstruccion){
+        int instrucciones=Operaciones.numeroInstrucciones-numeroInstruccion;
         String[] parts;
         parts = Operaciones.memoria[posicionMemoria].split(" ");
         tfOperacion1.setText(parts[0]);
@@ -125,8 +83,6 @@ public class JPPaso extends javax.swing.JPanel {
         tfRegistroCX.setText(Integer.toString(Operaciones.arregloRegistros[3]));
         tfRegistroDX.setText(Integer.toString(Operaciones.arregloRegistros[4]));
         tfRegistroIR.setText(Operaciones.memoria[posicionMemoria]);
-        tfRegistroPC.setText(Integer.toString(posicionMemoria+1));
-        //tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
         lbPaso.setText("Paso: "+paso);
     }
 

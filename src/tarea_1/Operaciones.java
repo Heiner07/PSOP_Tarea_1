@@ -16,7 +16,6 @@ import java.io.IOException;
  */
 public class Operaciones {
     
-    
     //[0] = AC
     //[1] = AX
     //[2] = BX
@@ -70,11 +69,10 @@ public class Operaciones {
                 cadena2 += cadena +"\n";               
             }
         }
-        //memoria = cadena2.split("\n");
         String[] cadenaTemp=cadena2.split("\n");
         numeroInstrucciones=cadenaTemp.length;
         posicionMemoria=(int) (Math.random() * 80);
-        System.out.println("Posicion de memoria: "+posicionMemoria);
+        //System.out.println("Posicion de memoria: "+posicionMemoria);
         int posicionMemoriaTemp=posicionMemoria;
         for(int i=0; i<numeroInstrucciones && posicionMemoriaTemp<memoria.length; posicionMemoriaTemp++,i++){
             memoria[posicionMemoriaTemp]=cadenaTemp[i];
@@ -95,65 +93,59 @@ public class Operaciones {
             }else{
                memoria[i] = toBinario(instruccionEnbits)+" "+toBinario(parteResto[0])+" 00000000";
             }
-            System.out.println(memoria[i]);
+            //System.out.println(memoria[i]);
         }
     }
     
     public static int registroPosicion(String registro){       
-            switch(registro) {
-                case "0001"://AX                    
-                     return 1;   
-                case "0010"://BX
-                    return 2;                                  
-                case "0011"://CX
-                    return 3;
-                case "0100"://DX
-                   return 4;
-                default:
-                    return 0;
-                   
-            }    
-
+        switch(registro) {
+            case "0001"://AX                    
+                 return 1;   
+            case "0010"://BX
+                return 2;                                  
+            case "0011"://CX
+                return 3;
+            case "0100"://DX
+               return 4;
+            default:
+                return 0;  
+        }
     }
     
     public static String toBinario(String registro){      
-            switch(registro) {
-                case "AX"://AX                    
-                     return "0001";   
-                case "BX"://BX
-                    return "0010";                                  
-                case "CX"://CX
-                    return "0011";
-                case "DX"://DX
-                   return "0100";
-                case "LOAD"://LOAD
-                   return "0001";
-                case "STORE"://STORE
-                   return "0010";
-                case "MOV"://MOV
-                   return "0011";
-                case "SUB"://SUB
-                   return "0100";                
-                case "ADD"://ADD
-                   return "0101";
-                default:
-                    return "0000";
-                   
-            }    
-
+        switch(registro) {
+            case "AX"://AX                    
+                 return "0001";   
+            case "BX"://BX
+                return "0010";                                  
+            case "CX"://CX
+                return "0011";
+            case "DX"://DX
+               return "0100";
+            case "LOAD"://LOAD
+               return "0001";
+            case "STORE"://STORE
+               return "0010";
+            case "MOV"://MOV
+               return "0011";
+            case "SUB"://SUB
+               return "0100";                
+            case "ADD"://ADD
+               return "0101";
+            default:
+                return "0000";
+        }    
     }
     
     
-   
-        
-            
     public void movimiento(String registro, String numero){
         
-            int numeroDecimal = Integer.parseInt(numero.substring(1, 8),2);
-            if("1".equals(numero.substring(0,1))){
-                numeroDecimal *= -1;           
-            }
-            arregloRegistros[registroPosicion(registro)] = numeroDecimal;                             
+        int numeroDecimal = Integer.parseInt(numero.substring(1, 8),2);
+        if("1".equals(numero.substring(0,1))){
+            numeroDecimal *= -1;           
+        }
+        arregloRegistros[registroPosicion(registro)] = numeroDecimal;
+        
     }
     
     public void sumar(String registro, String numero){
@@ -178,9 +170,10 @@ public class Operaciones {
                 numeroDecimal *= -1;           
             }
             arregloRegistros[registroPosicion(registro)] -= numeroDecimal;
-        }     
-           
+        }
     }
+    
+    
     public static String decimalABinaro(int a) {
         boolean negativo = false;
         if(a<0){
@@ -194,5 +187,13 @@ public class Operaciones {
         }
         if(negativo){temp="1"+temp;}else{temp="0"+temp;}
         return temp;
+    }
+    
+    public static void limpiarClase(){
+        arregloRegistros = new int[]{0,0,0,0,0};
+        memoria = new String[100];
+        posicionMemoria=0;
+        numeroInstrucciones=0;
+        ejecutar = false;
     }
 }
