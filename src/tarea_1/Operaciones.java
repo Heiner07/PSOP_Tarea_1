@@ -26,7 +26,7 @@ public class Operaciones {
     static String[] memoria = new String[100];
     static int posicionMemoria=0;
     static int numeroInstrucciones=0;
-    
+    static boolean ejecutar = false;
     
     public void Operaciones(String instrucciones){
         String[] parts;

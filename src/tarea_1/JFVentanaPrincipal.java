@@ -21,7 +21,7 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
     int posicionMemoria = 0;
     String rutaArchivo;
     Boolean archivoCargado;
-
+    
     /**
      * Creates new form JFVentanaPrincipal
      */
@@ -145,12 +145,22 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btAnalizarArchivoActionPerformed
 
     private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
-        if(paso<=Operaciones.numeroInstrucciones && posicionMemoria<99){
-            JPPaso ejecucion=new JPPaso(paso,posicionMemoria);
-            panelInstrucciones.add(ejecucion);
-            panelInstrucciones.updateUI();
+        if(paso<= (Operaciones.numeroInstrucciones *2) && posicionMemoria<99){
+            if(Operaciones.ejecutar){
+                JPPaso ejecutarInstruccion=new JPPaso(paso,posicionMemoria-1,1);   
+                panelInstrucciones.add(ejecutarInstruccion);
+                panelInstrucciones.updateUI();
+                Operaciones.ejecutar = false;
+            
+            }else{
+                JPPaso ejecucion=new JPPaso(paso,posicionMemoria);            
+                panelInstrucciones.add(ejecucion);
+                panelInstrucciones.updateUI();
+                Operaciones.ejecutar = true;
+                posicionMemoria++;
+            }           
             paso++;
-            posicionMemoria++;
+           
         }else{
             JOptionPane.showMessageDialog(this, "No hay más instrucciones o se llegó al final de la memoria.", "No hay más instrucciones",JOptionPane.WARNING_MESSAGE);
         }

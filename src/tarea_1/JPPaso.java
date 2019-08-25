@@ -21,10 +21,9 @@ public class JPPaso extends javax.swing.JPanel {
      * @param paso
      * @param posicionMemoria
      */
+    
     public JPPaso(int paso,int posicionMemoria) {
-        initComponents();
-        Operaciones op = new Operaciones();
-        op.Operaciones(Operaciones.memoria[posicionMemoria]);
+        initComponents();        
         int instrucciones=Operaciones.numeroInstrucciones-paso;
         String[] parts;
         parts = Operaciones.memoria[posicionMemoria].split(" ");
@@ -70,6 +69,63 @@ public class JPPaso extends javax.swing.JPanel {
         tfRegistroDX.setText(Integer.toString(Operaciones.arregloRegistros[4]));
         tfRegistroIR.setText(Operaciones.memoria[posicionMemoria]);
         tfRegistroPC.setText(Integer.toString(posicionMemoria));
+        //tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
+        lbPaso.setText("Paso: "+paso);
+    }
+
+    
+    
+    public JPPaso(int paso,int posicionMemoria,int k) {
+        initComponents();     
+        Operaciones op = new Operaciones();        
+        op.Operaciones(Operaciones.memoria[posicionMemoria]);//execute stage
+        
+        
+        int instrucciones=Operaciones.numeroInstrucciones-paso;
+        String[] parts;
+        parts = Operaciones.memoria[posicionMemoria].split(" ");
+        tfOperacion1.setText(parts[0]);
+        tfRegistro1.setText(parts[1]);
+        tfValor1.setText(parts[2]);
+        lbMemoria1.setText(String.valueOf(posicionMemoria));
+        if(instrucciones>=2){
+            parts = Operaciones.memoria[posicionMemoria+1].split(" ");
+            tfOperacion2.setText(parts[0]);
+            tfRegistro2.setText(parts[1]);
+            tfValor2.setText(parts[2]);
+            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
+            parts = Operaciones.memoria[posicionMemoria+2].split(" ");
+            tfOperacion3.setText(parts[0]);
+            tfRegistro3.setText(parts[1]);
+            tfValor3.setText(parts[2]);
+            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
+        }else if(instrucciones==1){
+            parts = Operaciones.memoria[posicionMemoria+1].split(" ");
+            tfOperacion2.setText(parts[0]);
+            tfRegistro2.setText(parts[1]);
+            tfValor2.setText(parts[2]);
+            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
+            tfOperacion3.setText("0000");
+            tfRegistro3.setText("0000");
+            tfValor3.setText("000000000");
+            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
+        }else{
+            tfOperacion2.setText("0000");
+            tfRegistro2.setText("0000");
+            tfValor2.setText("00000000");
+            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
+            tfOperacion3.setText("0000");
+            tfRegistro3.setText("0000");
+            tfValor3.setText("000000000");
+            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
+        }
+        tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
+        tfRegistroAX.setText(Integer.toString(Operaciones.arregloRegistros[1]));
+        tfRegistroBX.setText(Integer.toString(Operaciones.arregloRegistros[2]));
+        tfRegistroCX.setText(Integer.toString(Operaciones.arregloRegistros[3]));
+        tfRegistroDX.setText(Integer.toString(Operaciones.arregloRegistros[4]));
+        tfRegistroIR.setText(Operaciones.memoria[posicionMemoria]);
+        tfRegistroPC.setText(Integer.toString(posicionMemoria+1));
         //tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
         lbPaso.setText("Paso: "+paso);
     }
@@ -156,7 +212,7 @@ public class JPPaso extends javax.swing.JPanel {
 
         tfRegistroAC.setEditable(false);
         tfRegistroAC.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tfRegistroAC.setText("0002");
+        tfRegistroAC.setText("0");
         tfRegistroAC.setPreferredSize(new java.awt.Dimension(80, 30));
 
         tfRegistroIR.setEditable(false);
@@ -166,17 +222,17 @@ public class JPPaso extends javax.swing.JPanel {
 
         tfRegistroAX.setEditable(false);
         tfRegistroAX.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tfRegistroAX.setText("0004");
+        tfRegistroAX.setText("0");
         tfRegistroAX.setPreferredSize(new java.awt.Dimension(80, 30));
 
         tfRegistroBX.setEditable(false);
         tfRegistroBX.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tfRegistroBX.setText("0005");
+        tfRegistroBX.setText("0");
         tfRegistroBX.setPreferredSize(new java.awt.Dimension(80, 30));
 
         tfRegistroCX.setEditable(false);
         tfRegistroCX.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tfRegistroCX.setText("0006");
+        tfRegistroCX.setText("0");
         tfRegistroCX.setPreferredSize(new java.awt.Dimension(80, 30));
 
         lbMemoria4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -202,7 +258,7 @@ public class JPPaso extends javax.swing.JPanel {
 
         tfRegistroDX.setEditable(false);
         tfRegistroDX.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tfRegistroDX.setText("0007");
+        tfRegistroDX.setText("0");
         tfRegistroDX.setPreferredSize(new java.awt.Dimension(80, 30));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
