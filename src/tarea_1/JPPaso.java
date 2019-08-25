@@ -5,29 +5,64 @@
  */
 package tarea_1;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Heiner
  */
 public class JPPaso extends javax.swing.JPanel {
 
+    
+    JTextField[] camposOperaciones;
+    
     /**
      * Creates new form JPPaso
      * @param paso
      * @param posicionMemoria
      */
     public JPPaso(int paso,int posicionMemoria) {
-        
-        
         initComponents();
         Operaciones op = new Operaciones();
         op.Operaciones(Operaciones.memoria[posicionMemoria]);
-        
+        int instrucciones=Operaciones.numeroInstrucciones-paso;
         String[] parts;
         parts = Operaciones.memoria[posicionMemoria].split(" ");
         tfOperacion1.setText(parts[0]);
         tfRegistro1.setText(parts[1]);
         tfValor1.setText(parts[2]);
+        lbMemoria1.setText(String.valueOf(posicionMemoria));
+        if(instrucciones>=2){
+            parts = Operaciones.memoria[posicionMemoria+1].split(" ");
+            tfOperacion2.setText(parts[0]);
+            tfRegistro2.setText(parts[1]);
+            tfValor2.setText(parts[2]);
+            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
+            parts = Operaciones.memoria[posicionMemoria+2].split(" ");
+            tfOperacion3.setText(parts[0]);
+            tfRegistro3.setText(parts[1]);
+            tfValor3.setText(parts[2]);
+            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
+        }else if(instrucciones==1){
+            parts = Operaciones.memoria[posicionMemoria+1].split(" ");
+            tfOperacion2.setText(parts[0]);
+            tfRegistro2.setText(parts[1]);
+            tfValor2.setText(parts[2]);
+            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
+            tfOperacion3.setText("0000");
+            tfRegistro3.setText("0000");
+            tfValor3.setText("000000000");
+            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
+        }else{
+            tfOperacion2.setText("0000");
+            tfRegistro2.setText("0000");
+            tfValor2.setText("00000000");
+            lbMemoria2.setText(String.valueOf(posicionMemoria+1));
+            tfOperacion3.setText("0000");
+            tfRegistro3.setText("0000");
+            tfValor3.setText("000000000");
+            lbMemoria3.setText(String.valueOf(posicionMemoria+2));
+        }
         tfRegistroAC.setText(Integer.toString(Operaciones.arregloRegistros[0]));
         tfRegistroAX.setText(Integer.toString(Operaciones.arregloRegistros[1]));
         tfRegistroBX.setText(Integer.toString(Operaciones.arregloRegistros[2]));

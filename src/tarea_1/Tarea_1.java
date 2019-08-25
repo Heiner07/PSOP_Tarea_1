@@ -35,7 +35,7 @@ public class Tarea_1 {
         op.Operaciones(prueba5);
         op.Operaciones(prueba6);
         */
-        Operaciones.muestraContenido("C:/Users/home/Desktop/Principios de Software/pruebaEjemplo.asm");
+        //Operaciones.muestraContenido("C:\\Users\\Heine\\Documents\\1.TEC\\Principios de Sistemas Operativos\\instrucciones.asm");
         
     }
     

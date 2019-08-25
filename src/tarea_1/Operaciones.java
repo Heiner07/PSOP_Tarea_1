@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  *
@@ -24,7 +23,9 @@ public class Operaciones {
     //[3] = CX
     //[4] = DX
     static int[] arregloRegistros = {0,0,0,0,0};
-    static String[] memoria = new String[99];
+    static String[] memoria = new String[100];
+    static int posicionMemoria=0;
+    static int numeroInstrucciones=0;
     
     
     public void Operaciones(String instrucciones){
@@ -69,14 +70,23 @@ public class Operaciones {
                 cadena2 += cadena +"\n";               
             }
         }
-        memoria = cadena2.split("\n");
+        //memoria = cadena2.split("\n");
+        String[] cadenaTemp=cadena2.split("\n");
+        numeroInstrucciones=cadenaTemp.length;
+        posicionMemoria=(int) (Math.random() * 80);
+        System.out.println("Posicion de memoria: "+posicionMemoria);
+        int posicionMemoriaTemp=posicionMemoria;
+        for(int i=0; i<numeroInstrucciones && posicionMemoriaTemp<memoria.length; posicionMemoriaTemp++,i++){
+            memoria[posicionMemoriaTemp]=cadenaTemp[i];
+        }
         memoriaToBits();
     }
     
     public static void memoriaToBits(){
-        String[] parteOperacion,parteResto; 
-        String instruccionEnbits;       
-        for(int i=0;i<memoria.length;i++){
+        String[] parteOperacion,parteResto;
+        String instruccionEnbits;
+        int largo=posicionMemoria+numeroInstrucciones;
+        for(int i=posicionMemoria;i<largo;i++){
             parteOperacion = memoria[i].split(" ");
             instruccionEnbits = parteOperacion[0];
             parteResto = parteOperacion[1].split(",");

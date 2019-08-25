@@ -6,6 +6,7 @@
 package tarea_1;
 
 import java.io.File;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -17,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class JFVentanaPrincipal extends javax.swing.JFrame {
     
     int paso=1;
-    int posicionMemoria = 2;
+    int posicionMemoria = 0;
     String rutaArchivo;
     Boolean archivoCargado;
 
@@ -75,6 +76,7 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
 
         btSiguiente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btSiguiente.setText("Siguiente");
+        btSiguiente.setEnabled(false);
         btSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSiguienteActionPerformed(evt);
@@ -129,18 +131,29 @@ public class JFVentanaPrincipal extends javax.swing.JFrame {
 
     private void btAnalizarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnalizarArchivoActionPerformed
         if(archivoCargado){
-            
+            try {
+                Operaciones.muestraContenido(rutaArchivo);
+                posicionMemoria=Operaciones.posicionMemoria;
+                btSiguienteActionPerformed(evt); // Funcion del boton Siguiente.
+                btSiguiente.setEnabled(true);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error de archivo",JOptionPane.ERROR_MESSAGE);
+            }
         }else{
             JOptionPane.showMessageDialog(this, "Cargue un archivo para analizar", "Carga de archivo",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btAnalizarArchivoActionPerformed
 
     private void btSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiguienteActionPerformed
-        JPPaso ejecucion=new JPPaso(paso,posicionMemoria);
-        panelInstrucciones.add(ejecucion);
-        panelInstrucciones.updateUI();
-        paso++;
-        posicionMemoria++;
+        if(paso<=Operaciones.numeroInstrucciones && posicionMemoria<99){
+            JPPaso ejecucion=new JPPaso(paso,posicionMemoria);
+            panelInstrucciones.add(ejecucion);
+            panelInstrucciones.updateUI();
+            paso++;
+            posicionMemoria++;
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay más instrucciones o se llegó al final de la memoria.", "No hay más instrucciones",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btSiguienteActionPerformed
 
     private void btCargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCargarArchivoActionPerformed
